@@ -89,27 +89,20 @@
        this.f_90990_.m_85409_(this.f_91066_.m_231817_().m_231551_());
        this.f_90990_.m_85424_(this.f_91066_.m_232123_().m_231551_());
        this.f_90990_.m_85426_();
-@@ -563,23 +_,23 @@
+@@ -556,30 +_,30 @@
+       List<PackResources> list = this.f_91038_.m_10525_();
+       this.f_167847_.m_168557_(ResourceLoadStateTracker.ReloadReason.INITIAL, list);
+       ReloadInstance reloadinstance = this.f_91036_.m_142463_(Util.m_183991_(), this, f_90983_, list);
+-      this.m_91150_(new LoadingOverlay(this, reloadinstance, (p_210745_) -> {
++      this.m_91150_(net.minecraftforge.fml.loading.ImmediateWindowHandler.<LoadingOverlay>loadingOverlay(()->this, ()->reloadinstance, (p_210745_) -> {
+          Util.m_137521_(p_210745_, this::m_91239_, () -> {
+             if (SharedConstants.f_136183_) {
+                this.m_91273_();
              }
  
              this.f_167847_.m_168556_();
-+            if (net.minecraftforge.client.loading.ClientModLoader.completeModLoading()) return; // Do not overwrite the error screen
-+            // FORGE: Move opening initial screen to after startup and events are enabled.
-+            if (s != null) {
-+               ConnectScreen.m_169267_(new TitleScreen(), this, new ServerAddress(s, i), (ServerData)null);
-+            } else if (this.m_239929_()) {
-+               this.m_91152_(BanNoticeScreen.m_239967_((p_238185_) -> {
-+                  if (p_238185_) {
-+                     Util.m_137581_().m_137646_("https://aka.ms/mcjavamoderation");
-+                  }
-+
-+                  this.m_91152_(new TitleScreen(true));
-+               }, this.m_239210_()));
-+            } else {
-+               this.m_91152_(new TitleScreen(true));
-+            }
-          });
-       }, false));
+-         });
+-      }, false));
 -      if (s != null) {
 -         reloadinstance.m_7237_().thenRunAsync(() -> {
 -            ConnectScreen.m_169267_(new TitleScreen(), this, new ServerAddress(s, i), (ServerData)null);
@@ -119,12 +112,28 @@
 -            if (p_238185_) {
 -               Util.m_137581_().m_137646_("https://aka.ms/mcjavamoderation");
 -            }
--
++            if (net.minecraftforge.client.loading.ClientModLoader.completeModLoading()) return; // Do not overwrite the error screen
++            // FORGE: Move opening initial screen to after startup and events are enabled.
++            if (s != null) {
++               ConnectScreen.m_169267_(new TitleScreen(), this, new ServerAddress(s, i), (ServerData)null);
++            } else if (this.m_239929_()) {
++               this.m_91152_(BanNoticeScreen.m_239967_((p_238185_) -> {
++                  if (p_238185_) {
++                     Util.m_137581_().m_137646_("https://aka.ms/mcjavamoderation");
++                  }
+ 
 -            this.m_91152_(new TitleScreen(true));
 -         }, this.m_239210_()));
 -      } else {
 -         this.m_91152_(new TitleScreen(true));
 -      }
++                  this.m_91152_(new TitleScreen(true));
++               }, this.m_239210_()));
++            } else {
++               this.m_91152_(new TitleScreen(true));
++            }
++         });
++      }, false).get());
  
     }
  

@@ -6,6 +6,7 @@
 package net.minecraftforge.fml.loading.moddiscovery;
 
 import com.mojang.logging.LogUtils;
+import net.minecraftforge.fml.loading.ImmediateWindowHandler;
 import net.minecraftforge.fml.loading.LoadingModList;
 import net.minecraftforge.fml.loading.LogMarkers;
 import net.minecraftforge.forgespi.language.ModFileScanData;
@@ -60,6 +61,7 @@ public class BackgroundScanHandler
             throw new IllegalStateException("Scanner has shutdown");
         }
         status = ScanStatus.RUNNING;
+        ImmediateWindowHandler.updateProgress("Scanning mod candidates");
         allFiles.add(file);
         pendingFiles.add(file);
         final CompletableFuture<ModFileScanData> future = CompletableFuture.supplyAsync(file::compileContent, modContentScanner)

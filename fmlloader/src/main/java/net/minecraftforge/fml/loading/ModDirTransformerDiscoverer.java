@@ -34,6 +34,11 @@ public class ModDirTransformerDiscoverer implements ITransformerDiscoveryService
         return List.copyOf(found);
     }
 
+    @Override
+    public void earlyInitialization(final String launchTarget, final String[] arguments) {
+        ImmediateWindowHandler.load(launchTarget, arguments);
+    }
+
     private final static List<NamedPath> found = new ArrayList<>();
 
     public static List<Path> allExcluded() {

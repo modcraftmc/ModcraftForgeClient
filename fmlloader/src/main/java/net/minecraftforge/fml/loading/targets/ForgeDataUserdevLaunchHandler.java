@@ -21,7 +21,7 @@ public class ForgeDataUserdevLaunchHandler extends ForgeUserdevLaunchHandler {
     public boolean isData() { return true; }
 
     @Override
-    public ServiceRunner launchService(String[] arguments, ModuleLayer layer) {
+    public ServiceRunner makeService(String[] arguments, ModuleLayer layer) {
         return () -> {
             var args = preLaunch(arguments, layer);
 

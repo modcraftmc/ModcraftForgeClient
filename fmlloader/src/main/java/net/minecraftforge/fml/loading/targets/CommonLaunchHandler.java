@@ -8,6 +8,8 @@ package net.minecraftforge.fml.loading.targets;
 import com.mojang.logging.LogUtils;
 import cpw.mods.modlauncher.api.ILaunchHandlerService;
 import cpw.mods.modlauncher.api.ITransformingClassLoaderBuilder;
+import cpw.mods.modlauncher.api.ServiceRunner;
+import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.fml.loading.LogMarkers;
 import net.minecraftforge.api.distmarker.Dist;
 import org.slf4j.Logger;
@@ -63,4 +65,12 @@ public abstract class CommonLaunchHandler implements ILaunchHandlerService {
         //modClassPaths.forEach((modlabel,paths) -> explodedTargets.add(new ExplodedDirectoryLocator.ExplodedMod(modlabel, paths)));
         return modClassPaths;
     }
+
+    @Override
+    public ServiceRunner launchService(final String[] arguments, final ModuleLayer gameLayer) {
+        FMLLoader.beforeStart(gameLayer);
+        return makeService(arguments, gameLayer);
+    }
+
+    protected abstract ServiceRunner makeService(final String[] arguments, final ModuleLayer gameLayer);
 }

@@ -18,7 +18,7 @@ public class FMLClientUserdevLaunchHandler extends FMLUserdevLaunchHandler {
     public Dist getDist() { return Dist.CLIENT; }
 
     @Override
-    public ServiceRunner launchService(String[] arguments, ModuleLayer layer) {
+    public ServiceRunner makeService(String[] arguments, ModuleLayer layer) {
         return () -> {
             var args = preLaunch(arguments, layer);
 

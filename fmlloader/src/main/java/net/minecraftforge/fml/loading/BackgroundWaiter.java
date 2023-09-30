@@ -14,6 +14,7 @@ public class BackgroundWaiter {
     private static ExecutorService runner = Executors.newSingleThreadExecutor();
 
     public static void runAndTick(Runnable r, Runnable tick) {
+        ImmediateWindowHandler.updateProgress("Loading bootstrap resources");
         final Future<?> work = runner.submit(r);
         do {
             tick.run();
